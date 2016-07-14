@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ballin on a Budget</title>
+  <style type="text/css">
+
+    .sneakersImage! {
+      width: 250px;
+      height: 250px;
+    }
+
+    img{ border: solid 5px #fff;
+
+ }
+
+  </style>
+</head>
+<body>
+
+<p><span id="number"></span></p>
+
+<p><span id="yourNumber"></span></p>
+
+<div id="sneakers">
+</div>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">
+  $( document ).ready(function() {
+    var numberToGuess = 345;
+    var counter = 0;
+    var numbers = [85, 195, 100, 65];
+    function shuffle(a) {
+        var j, x, i;
+        for (i = a.length; i; i--) {
+            j = Math.floor(Math.random() * i);
+            x = a[i - 1];
+            a[i - 1] = a[j];
+            a[j] = x;
+        }
+    }
+    shuffle(numbers);
+    console.log(numbers);
+    $('#number').text(numberToGuess);
+    for (var i=0; i< numbers.length; i++){
+      var imageSneakers = $('<img>');
+      imageSneakers.attr('data-num', numbers[i]);
+      imageSneakers.attr('src', 'http://cdn.sneakernews.com/wp-content/uploads/2016/02/Air-Jordan-4-Retro-OG-white-Cement-release-reminder-2-620x435.jpg');
+      imageSneakers.attr('alt', 'sneakers');
+      imageSneakers.addClass('sneakersImage');
+      $('#sneakers').append(imageSneakers);
+    }
+    $('.sneakersImage').on('click', function(){
+      counter = counter + parseInt($(this).data('num'));
+      $('#yourNumber').text(counter);
+      if (counter == numberToGuess){
+        alert('You won!!!!');
+      }else if( counter > numberToGuess){
+        alert('You lost!');
+      }
+    });
+  });
+</script>
+</body>
+</html>
